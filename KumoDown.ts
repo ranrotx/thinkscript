@@ -9,7 +9,7 @@ input tenkanPeriod = 9;
 input kijunPeriod = 26;
 
 def chikou = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod).Chikou;
-def kumo = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span A";
+def kumo = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span B";
 
 def setupTrue = close[0] < kumo[0] and close[4] > kumo[4];
 def confirmationTrue = chikou[26] < kumo[26];
