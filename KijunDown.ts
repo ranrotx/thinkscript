@@ -12,7 +12,7 @@ def kijun = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod).Ki
 def chikou = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod).Chikou;
 def kumo = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span A";
 
-def setupTrue = close[0] < kijun[0] and close[2] > kijun[2];
+def setupTrue = Crosses(close[0], kijun[0], CrossingDirection.BELOW) and close[2] > kijun[2];
 def triggerTrue = chikou[26] < kumo[26];
 
 plot kijunDown = if setupTrue and triggerTrue then high * 0.990 else Double.NaN;

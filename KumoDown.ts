@@ -11,7 +11,7 @@ input kijunPeriod = 26;
 def chikou = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod).Chikou;
 def kumo = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span B";
 
-def setupTrue = close[0] < kumo[0] and close[4] > kumo[4];
+def setupTrue = Crosses(close[0], kumo[0], CrossingDirection.BELOW) and close[4] > kumo[4];
 def confirmationTrue = chikou[26] < kumo[26];
 
 plot kumoDown = if setupTrue and confirmationTrue then low * 0.990 else Double.NaN;
