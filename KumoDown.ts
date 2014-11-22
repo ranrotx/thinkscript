@@ -9,10 +9,11 @@ input tenkanPeriod = 9;
 input kijunPeriod = 26;
 
 def chikou = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod).Chikou;
-def kumo = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span A";
+def kumoA = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span A";
+def kumoB = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."Span B";
 
-def setupTrue = Crosses(close[0], kumo[0], CrossingDirection.BELOW) and close[4] > kumo[4];
-def confirmationTrue = chikou[26] < kumo[26];
+def setupTrue = Crosses(close[0], kumoB[0], CrossingDirection.BELOW) and close[4] > kumoB[4];
+def confirmationTrue = chikou[26] < kumoA[26] and chikou[26] < kumoB[26];
 
 plot kumoDown = if setupTrue and confirmationTrue then low * 0.990 else Double.NaN;
 kumoDown.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_DOWN);

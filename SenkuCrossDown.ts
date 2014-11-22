@@ -14,7 +14,7 @@ def kumoB = Ichimoku("tenkan period"=tenkanPeriod,"kijun period"=kijunPeriod)."S
 
 # kumoA below kumoB 26 days into the future, was above day before
 def setupTrue = Crosses(kumoA[-26], kumoB[-26], CrossingDirection.BELOW);
-def triggerTrue = chikou[26] < kumoB[26];
+def triggerTrue = chikou[26] < kumoB[26] and chikou[26] < kumoA[26];
 
 plot senkuCrossDown = if setupTrue and triggerTrue then high * 0.990 else Double.NaN;
 senkuCrossDown.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_DOWN);
